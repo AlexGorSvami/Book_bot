@@ -7,8 +7,6 @@ S
 -.idea/sonarlint/securityhotspotstore/index.pb,8/8/88a9255124c95bdc913197c120a8d560edc59c8e
 =
 book/book.txt,e/6/e61638e13b45d3e7a6df868999f545d78f4fa5d0
-D
-database/database.py,b/d/bdfb0d0d54d6d1e4726b4dfd661ac4eee5ff1fb2
 B
 filters/filters.py,a/0/a03a839acc7fd9f55865ab08c4abb3fe0e85d9bd
 J
