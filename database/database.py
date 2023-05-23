@@ -1,5 +1,5 @@
 #Шаблон заполнения словаря с пользователями
-user_dict: dict = {'page': 1,
+user_dict_template: dict = {'page': 1,
                    'bookmarks': set()}
 
 # Инициализация БД

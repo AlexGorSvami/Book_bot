@@ -1,20 +1,20 @@
-BOOK_PATH = '/home/alex/Book_bot/book/besy.txt'
+import os
+BOOK_PATH = '/home/alex/Book_bot/book/book.txt'
 PAGE_SIZE = 1050
 
 book: dict[int, str] = {}
 
 #Функция, возвращающая строку с текстом страницы и её размер
 def _get_part_text(text: str, start: int, size: int) -> tuple[str, int]:
-    def _get_part_text(text, start, size):
-        symbols = ',.!:;?'
-        end = start + size
-        if text[start:end][-1] not in symbols:
+    symbols = ',.!:;?'
+    end = start + size
+    if text[start:end][-1] not in symbols:
+        return _get_part_text(text, start, size - 1)
+    if text[start:end + 1][-1] in symbols:
+        if text[start:end + 1] != text[start:end]:
             return _get_part_text(text, start, size - 1)
-        if text[start:end + 1][-1] in symbols:
-            if text[start:end + 1] != text[start:end]:
-                return _get_part_text(text, start, size - 1)
-            return text[start:end], len(text[start:end])
-        return text[start:end], size
+        return text[start:end], len(text[start:end])
+    return text[start:end], size
 
 
 
@@ -31,6 +31,6 @@ def prepare_book(path: str) -> None:
 
 
 #Вызов функции prepare_book для подготовки книги из текстового файла
-prepare_book(BOOK_PATH)
+prepare_book(os.path.join(os.getcwd(), BOOK_PATH))
 
 
