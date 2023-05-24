@@ -1,6 +1,6 @@
 import os
 
-BOOK_PATH = 'book/New_book.txt'
+BOOK_PATH = 'book/book.txt'
 PAGE_SIZE = 1200
 
 book: dict[int, str] = {}
