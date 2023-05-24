@@ -1,8 +1,9 @@
 from copy import deepcopy
 
 from aiogram import Router
-from  aiogram.filters import Command, CommandStart, Text
+from aiogram.filters import Command, CommandStart, Text
 from aiogram.types import CallbackQuery, Message
+
 from database.database import user_dict_template, users_db
 from filters.filters import IsDelBookmarkCallbackData, IsDigitCallbackData
 from keyboards.bookmarks_kb import (create_bookmarks_keyboard, create_edit_keyboard)
@@ -15,7 +16,7 @@ router: Router = Router()
 #Хедлер для комманды /start он же будет добовлять пользователя в
 #БД если его та нет
 @router.message(CommandStart())
-async def process_start_comand(message: Message):
+async def process_start_command(message: Message):
     await message.answer(LEXICON['/start'])
     if message.from_user.id not in users_db:
         users_db[message.from_user.id] = deepcopy(user_dict_template)
@@ -68,7 +69,7 @@ async def process_bookmarks_command(message: Message):
 
 #хендлер для комманды инлвйн-кнопки вперёд
 @router.callback_query(Text(text='forward'))
-async def process_forward_press(callback:   CallbackQuery):
+async def process_forward_press(callback: CallbackQuery):
     if users_db[callback.from_user.id]['page'] < len(book):
         users_db[callback.from_user.id]['page'] += 1
         text = book[users_db[callback.from_user.id]['page']]
@@ -134,7 +135,6 @@ async def process_edit_press(callback: CallbackQuery):
 async def process_cancel_press(callback: CallbackQuery):
     await callback.message.edit_text(text=LEXICON['cancel_text'])
     await callback.answer()
-
 
 #хендлер для инлайн-кнопки с закладкой из списка к удалению
 @router.callback_query(IsDelBookmarkCallbackData())

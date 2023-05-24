@@ -10,6 +10,10 @@ def create_bookmarks_keyboard(*args: int) -> InlineKeyboardMarkup:
     # Наполняю клавиатуру кнопками-щакладками в порядке возрастания
     for button in sorted(args):
         kb_builder.row(InlineKeyboardButton(
+            text=f'{button} - {book[button][:80]}',
+            callback_data=str(button)))
+    #Добавление кнопок Редактировать и отменить
+    kb_builder.row(InlineKeyboardButton(
             text=LEXICON['edit_bookmarks_button'],
             callback_data='edit_bookmarks'),
         InlineKeyboardButton(
@@ -25,7 +29,7 @@ def create_edit_keyboard(*args: int) -> InlineKeyboardMarkup:
     # Наполняю клавиатуру кнопками-закладками в порядке возрастания
     for button in sorted(args):
         kb_builder.row(InlineKeyboardButton(
-            text=f'{LEXICON["del"]} {button} - {book[button][:100]} ',
+            text=f'{LEXICON["del"]} {button} - {book[button][:80]} ',
             callback_data=f'{button}del'))
     #Добавляю в конец клавиатуры кнопку "Отвенить"
     kb_builder.row(InlineKeyboardButton(
